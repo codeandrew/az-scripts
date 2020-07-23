@@ -14,6 +14,19 @@ az network nsg create -g $RG \
   -n $NSG \
   --tags no_80 no_22 nsg
 
+# NSG RULE SSH
+az network nsg rule create -g $RG \
+    -n ALLOW_SSH \
+    --access allow \
+    --destination-address-prefix '*' \
+    --destination-port-range 22 \
+    --direction inbound \
+    --nsg-name $NSG \
+    --protocol tcp \
+    --source-address-prefix '*' \
+    --source-port-range '*' \
+    --priority 1000
+
 # Create ACR
 az acr create $RG -n AZDemoACR --sku basic 
 
