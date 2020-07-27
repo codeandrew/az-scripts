@@ -10,3 +10,4 @@ export SUBNET=$NAME-subnet
 
 export ACR=azjafdemo
 export VM=$NAME-vm
+export AKS=$NAME-aks
