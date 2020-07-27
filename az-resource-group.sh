@@ -28,17 +28,24 @@ az network nsg rule create -g $RG \
     --priority 1000
 
 # Create ACR
-az acr create $RG -n AZDemoACR --sku basic 
+az acr create -n $ACR -g $RG --sku basic 
 
 # Login to ACR 
-az acr login --name az-demo-acr 
+az acr login --name $ACR 
 
 az acr list
 
-# azdemoacr.azurecr.io
-
 # Create Service Principal 
-az ad sp create-for-rbac --skip-assignment
+SERVICE_PRINCIPAL=$(az ad sp create-for-rbac --skip-assignment)
+echo $SERVICE_PRINCIPAL > service_principal.txt 
 
-echo "Get all Values"
-echo  "appId,  displayName,  name, password, tenant "
+jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' service_principal.txt > service_principal.env 
+echo "This is your Service Principal Get all values, Assign later"
+cat service_principal.env 
+
+ID=$(az acr show -g $RG -n $ACR | jq .id )
+echo "ACRID=$ID" >> service_principal.env
+
+
+
+
