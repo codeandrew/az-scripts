@@ -7,3 +7,6 @@ export RG=$NAME-rg
 export VNET=$NAME-vnet
 export NSG=$NAME-nsg
 export SUBNET=$NAME-subnet
+
+export ACR=azjafdemo
+export VM=$NAME-vm
