@@ -38,7 +38,7 @@ az network nsg rule create -g $RG \
     --destination-port-range 80 443 \
     --direction inbound \
     --nsg-name $NSG \
-    --protocol * \
+    --protocol '*' \
     --source-address-prefix '*' \
     --source-port-range '*' \
     --priority 1010
