@@ -7,6 +7,10 @@ az network public-ip create -n $NAME-ip-0\
   -g $RG -l $LOCATION \
   --allocation-method dynamic
 
+echo "${GREEN} Attaching DNS ${NOCOLOR}"
+az network public-ip update -n $NAME-ip-0\
+  -g $RG --dns-name $DNS 
+
 echo "${GREEN} Creating Network Interface: ${RED} ${NAME}-nic ${NOCOLOR}"
 az network nic create -g $RG \
   -n $NAME-nic --vnet-name $VNET \
