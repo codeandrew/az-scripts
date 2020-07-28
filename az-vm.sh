@@ -12,7 +12,7 @@ az network nic create -g $RG \
   --public-ip-address $NAME-ip-0
 
 az vm create -n $VM -g $RG --image UbuntuLTS \
-    --nics $NAME-nic
+    --nics $NAME-nic \
     --vnet-name $VNET \
     --subnet $SUBNET-0 \
     --data-disk-sizes-gb 10 20 \
