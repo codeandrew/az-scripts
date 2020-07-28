@@ -27,5 +27,8 @@ az vm create -n $VM -g $RG --image UbuntuLTS \
     --generate-ssh-keys
 
 # When specifying an existing NIC, do not specify NSG, public IP, ASGs, VNet or subnet.
+# The --generate-ssh-keys parameter is used to automatically generate an SSH key, and put it in the default key location (~/.ssh).
+# https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+
 
 
