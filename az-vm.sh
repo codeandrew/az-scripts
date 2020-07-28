@@ -17,9 +17,8 @@ echo "${GREEN} Creating Virtual Machine: ${RED} ${VM} ${NOCOLOR}"
 echo "Operating System: Ubuntu"
 az vm create -n $VM -g $RG --image UbuntuLTS \
     --nics $NAME-nic \
-    --vnet-name $VNET \
-    --subnet $SUBNET-0 \
     --data-disk-sizes-gb 10 20 \
     --size Standard_DS2_v2
+# When specifying an existing NIC, do not specify NSG, public IP, ASGs, VNet or subnet.
 
 
