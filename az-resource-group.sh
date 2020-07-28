@@ -30,6 +30,19 @@ az network nsg rule create -g $RG \
     --source-port-range '*' \
     --priority 1000
 
+# NSG RULE Website and SSL
+az network nsg rule create -g $RG \
+    -n ALLOW_WEBSITE_SSL \
+    --access allow \
+    --destination-address-prefix '*' \
+    --destination-port-range 80 443 \
+    --direction inbound \
+    --nsg-name $NSG \
+    --protocol * \
+    --source-address-prefix '*' \
+    --source-port-range '*' \
+    --priority 1010
+
 # Create ACR
 echo "${GREEN} Creating Container Registry: ${RED} ${ACR} ${NOCOLOR}"
 az acr create -n $ACR -g $RG --sku basic 
