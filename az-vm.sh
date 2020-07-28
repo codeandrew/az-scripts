@@ -1,5 +1,4 @@
 #!/bin/bash
-
 source ./config.sh
 
 echo "${GREEN} Creating Public IP ${NOCOLOR}"
@@ -15,6 +14,7 @@ echo "${GREEN} Creating Network Interface: ${RED} ${NAME}-nic ${NOCOLOR}"
 az network nic create -g $RG \
   -n $NAME-nic --vnet-name $VNET \
   --subnet $SUBNET-0 \
+  --network-security-group $NSG \ 
   --public-ip-address $NAME-ip-0
 
 echo "${GREEN} Creating Virtual Machine: ${RED} ${VM} ${NOCOLOR}"
