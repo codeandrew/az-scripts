@@ -34,3 +34,9 @@ az network vnet create -g MyResourceGroup -n MyVnet --address-prefix 10.0.0.0/16
 ```
 
 
+## References 
+
+### Moving Resources to another Subscription
+
+https://medium.com/@calloncampbell/moving-your-azure-resources-to-another-subscription-or-resource-group-1644f43d2e07#:~:text=Step%201%20%E2%80%94%20Navigate%20to%20the,Move%20to%20another%20subscription%20option.
+
