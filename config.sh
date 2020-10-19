@@ -8,7 +8,7 @@ export VNET=$NAME-vnet
 export NSG=$NAME-nsg
 export SUBNET=$NAME-subnet
 
-export ACR=azjafdemo
+export ACR=AzureJafDemo
 export VM=$NAME-vm
 export AKS=$NAME-aks
 
