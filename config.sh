@@ -7,6 +7,7 @@ export RG=$NAME-rg
 export VNET=$NAME-vnet
 export NSG=$NAME-nsg
 export SUBNET=$NAME-subnet
+export DNS=azjafdemo
 
 export ACR=AzureJafDemo
 export VM=$NAME-vm
