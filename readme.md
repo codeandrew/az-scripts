@@ -58,6 +58,11 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
     --set controller.service.loadBalancerIP="STATIC_IP" \
     --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-dns-label-name"="DNS_LABEL"
 ```
+### Trouble Shooting AKS
+
+```bash
+kubectl get events --all-namespaces
+```
 
 ## References 
 
