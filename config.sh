@@ -8,6 +8,7 @@ export VNET=$NAME-vnet
 export NSG=$NAME-nsg
 export SUBNET=$NAME-subnet
 export DNS=azjafdemo
+export PUBIP=$NAME-ip
 
 export ACR=AzureJafDemo
 export VM=$NAME-vm
