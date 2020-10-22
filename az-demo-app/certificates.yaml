@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: tls-secret
+spec:
+  secretName: tls-secret
+  dnsNames:
+  - azjafdemoaks.southeastasia.cloudapp.azure.com
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+      - azjafdemoaks.southeastasia.cloudapp.azure.com
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
