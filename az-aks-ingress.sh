@@ -2,27 +2,31 @@
 
 source ./config.sh 
 
-# az aks show --resource-group $RG \
-#     --name $AKS \
-#     --query nodeResourceGroup \
-#     -o tsv
+AKS_RG=MC_azjafdemo-rg_azjafdemo-aks_southeastasia
 
-# read -p 'wait till ok' OK
-# echo $OK
+# First get the resource group name of the AKS cluster
+az aks show --resource-group $RG \
+    --name $AKS \
+    --query nodeResourceGroup \
+    -o tsv
 
-# az network public-ip create \
-#     --resource-group MC_az-jaf-demo-rg_az-jaf-demo-aks_southeastasia \
-#     --name $PUBIP \
-#     --sku Standard \
-#     --allocation-method static \
-#     --query publicIp.ipAddress \
-#     -o tsv
+read -p 'wait till ok' OK
+echo $OK
 
-# # Create a namespace for your ingress resources
-# kubectl create namespace ingress-basic
+# Create Public IP
+az network public-ip create \
+    --resource-group $AKS_RG \
+    --name $PUBIP \
+    --sku Standard \
+    --allocation-method static \
+    --query publicIp.ipAddress \
+    -o tsv
 
-# # Add the ingress-nginx repository
-# helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+# Create a namespace for your ingress resources
+kubectl create namespace ingress-basic
+
+# Add the ingress-nginx repository
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 
 read -p 'Your Public IP Address for Azure Portal: ' NEW_PUBLIC_IP
 read -p 'Your DNS: ' NEW_DNS
@@ -37,5 +41,11 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
     --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-dns-label-name"="$NEW_DNS"
 
 
-# For CHECKING
+# For Checking External IP Pending
 kubectl --namespace ingress-basic get services -o wide -w nginx-ingress-ingress-nginx-controller
+
+# Check DNS Label if working
+az network public-ip list \
+    --resource-group $AKS_RG \
+    --query "[?name=='$PUBIP'].[dnsSettings.fqdn]" \
+    -o tsv
