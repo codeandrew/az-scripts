@@ -7,10 +7,10 @@ export RG=$NAME-rg
 export VNET=$NAME-vnet
 export NSG=$NAME-nsg
 export SUBNET=$NAME-subnet
-export DNS=$NAME-dns
+export DNS=$NAME.com
 export PUBIP=$NAME-ip
 
-export ACR=$NAME-acr
+export ACR="$NAME"acr
 export VM=$NAME-vm
 export AKS=$NAME-aks
 
