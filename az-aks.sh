@@ -30,7 +30,7 @@ az network nsg rule create -g $RG \
     --source-port-range '*' \
     --priority 1000
 
-Create ACR
+# Create ACR
 echo "${GREEN} Creating Container Registry: ${RED} ${ACR} ${NOCOLOR}"
 az acr create -n $ACR -g $RG --sku basic 
 
