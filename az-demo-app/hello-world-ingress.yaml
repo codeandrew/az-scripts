@@ -19,11 +19,15 @@ spec:
       - backend:
           serviceName: aks-helloworld-one
           servicePort: 80
-        path: /hello-world-one(/|$)(.*)
+        path: /hello-one(/|$)(.*)
       - backend:
           serviceName: aks-helloworld-two
           servicePort: 80
-        path: /hello-world-two(/|$)(.*)
+        path: /hello-two(/|$)(.*)
+      - backend:
+          serviceName: atmos-demo-node 
+          servicePort: 3000
+        path: /node(/|$)(.*)
       - backend:
           serviceName: aks-helloworld-one
           servicePort: 80
