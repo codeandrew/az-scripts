@@ -30,24 +30,24 @@ az network nsg rule create -g $RG \
     --source-port-range '*' \
     --priority 1000
 
-# Create ACR
-# echo "${GREEN} Creating Container Registry: ${RED} ${ACR} ${NOCOLOR}"
-# az acr create -n $ACR -g $RG --sku basic 
+Create ACR
+echo "${GREEN} Creating Container Registry: ${RED} ${ACR} ${NOCOLOR}"
+az acr create -n $ACR -g $RG --sku basic 
 
-# Login to ACR 
-# az acr login --name $ACR 
+Login to ACR 
+az acr login --name $ACR 
 
-# # Create Service Principal 
-# SERVICE_PRINCIPAL=$(az ad sp create-for-rbac --skip-assignment)
-# echo "${GREEN} Creating Service Principal ${NOCOLOR}"
-# echo $SERVICE_PRINCIPAL > service_principal.txt 
+# Create Service Principal 
+SERVICE_PRINCIPAL=$(az ad sp create-for-rbac --skip-assignment)
+echo "${GREEN} Creating Service Principal ${NOCOLOR}"
+echo $SERVICE_PRINCIPAL > service_principal.txt 
 
-# jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' service_principal.txt > service_principal.env 
-# echo "This is your Service Principal Get all values, Assign later"
-# cat service_principal.env 
+jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' service_principal.txt > service_principal.env 
+echo "This is your Service Principal Get all values, Assign later"
+cat service_principal.env 
 
-# ID=$(az acr show -g $RG -n $ACR | jq .id )
-# echo "ACRID=$ID" >> service_principal.env
+ID=$(az acr show -g $RG -n $ACR | jq .id )
+echo "ACRID=$ID" >> service_principal.env
 
 source ./service_principal.env
 
@@ -66,3 +66,7 @@ cat aks.log
 # Now we get the credentials 
 echo "Saving Kubernetes Credentials to Host"
 az aks get-credentials -g $RG -n $AKS
+
+# Attaching ACR in our AKS
+echo "Attaching ACR to AKS"
+az aks update -n $AKS -g $RG --attach-acr $ACR
