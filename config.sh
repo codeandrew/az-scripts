@@ -1,16 +1,16 @@
 #!/bin/sh
 
-export NAME=az-jaf-demo
+export NAME=azjafdemo
 export LOCATION=southeastasia
 
 export RG=$NAME-rg
 export VNET=$NAME-vnet
 export NSG=$NAME-nsg
 export SUBNET=$NAME-subnet
-export DNS=azjafdemo
+export DNS=$NAME-dns
 export PUBIP=$NAME-ip
 
-export ACR=AzureJafDemo
+export ACR=$NAME-acr
 export VM=$NAME-vm
 export AKS=$NAME-aks
 
