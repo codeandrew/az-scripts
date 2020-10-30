@@ -32,7 +32,7 @@ az network nsg rule create -g $RG \
 
 # Create ACR
 echo "${GREEN} Creating Container Registry: ${RED} ${ACR} ${NOCOLOR}"
-az acr create -n $ACR -g $RG --sku basic 
+az acr create -n $ACR -g $RG --sku standard 
 
 Login to ACR 
 az acr login --name $ACR 
