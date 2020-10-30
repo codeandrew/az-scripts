@@ -18,11 +18,12 @@ az group create -l $LOCATION -n $RG
 # Deploy Log Analytics Workspace
 solution='logAnalytics'
 template_path='../arm'
-template_file="${templatePath}/${solution}/azureDeploy.json"
+template_file="${template_path}/${solution}/azureDeploy.json"
 
+set -x
 timestamp=$(date -u +%FT%TZ | tr -dc '[:alnum:]\n\r')
-name="$(echo $group | jq .name -r)-${timestamp}"
-deployment=$(az group deployment create --resource-group $(echo $group | jq .name -r) --name ${name} --template-file ${templateFile} --verbose)
+name="${RG}-${timestamp}"
+deployment=$(az group deployment create --resource-group ${RG} --name ${name} --template-file ${template_file} --verbose)
 
 # Create Service Principal
 sp_name=sp-aks-${RG}
@@ -37,7 +38,7 @@ CLIENT_SECRET=$(echo $sp | jq .password -r)
 echo "${GREEN} Creating Container Registry: ${RED} ${ACR} ${NOCOLOR}"
 ACR_OUTPUT=$(az acr create -n $ACR -g $RG --sku standard)
 
-ACRID=$(echo $ACR_OUTPUT | jq .id )
+ACRID=$(eval(echo $ACR_OUTPUT | jq .id ))
 
 # Now we assign a role with the created service principal create before
 echo "${GREEN} Assigning Role to Service Principal"
@@ -53,13 +54,13 @@ az aks create \
     --name ${AKS} \
     --service-principal ${SERVICE_PRINCIPAL_ID} \
     --client-secret ${CLIENT_SECRET} \
-    --node-count 1 \
-    --node-vm-size Standard_DS1_v2 \
+    --node-count 2 \
+#     --node-vm-size Standard_DS1_v2 \
     --enable-addons monitoring \
     --generate-ssh-keys \
     --workspace-resource-id ${logAnalyticsId} \
     --disable-rbac \
-    --v
+    --verbose
 
 # Now we get the credentials 
 echo "Saving Kubernetes Credentials to Host"
