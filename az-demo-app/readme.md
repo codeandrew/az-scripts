@@ -65,3 +65,5 @@ TLS will take several minutes so you can check here
 ```bash
 kubectl describe certificate tls-secret -n demo
 ```
+
+## References
