@@ -27,7 +27,7 @@ az network dns record-set list \
 IP=20.195.48.181
 
 # Name to associate with public IP address
-DNSNAME="azjafdemo-aks"
+DNSNAME="azjafdemoaks"
 
 # Get the resource-id of the public ip
 PUBLICIPID=$(az network public-ip list --query "[?ipAddress!=null]|[?contains(ipAddress, '$IP')].[id]" --output tsv)
