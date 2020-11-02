@@ -2,9 +2,6 @@
 
 source ./config.sh 
 
-AKS_RG=MC_jafdemoproject-rg_jafdemoproject-aks_southeastasia
-
-
 # First get the resource group name of the AKS cluster
 AKS_RG=$(az aks show --resource-group $RG \
     --name $AKS \

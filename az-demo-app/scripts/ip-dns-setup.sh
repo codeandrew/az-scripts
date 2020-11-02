@@ -2,6 +2,11 @@
 
 source ./config.sh
 
+AKS_RG=$(az aks show --resource-group $RG \
+    --name $AKS \
+    --query nodeResourceGroup \
+    -o tsv)
+
 # Create Public IP
 az network public-ip create \
     --resource-group $AKS_RG \
