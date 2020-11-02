@@ -55,7 +55,6 @@ az aks create \
     --service-principal ${SERVICE_PRINCIPAL_ID} \
     --client-secret ${CLIENT_SECRET} \
     --node-count 2 \
-#     --node-vm-size Standard_DS1_v2 \
     --enable-addons monitoring \
     --generate-ssh-keys \
     --workspace-resource-id ${logAnalyticsId} \
