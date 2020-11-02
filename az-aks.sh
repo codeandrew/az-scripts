@@ -34,7 +34,7 @@ az network nsg rule create -g $RG \
 echo "${GREEN} Creating Container Registry: ${RED} ${ACR} ${NOCOLOR}"
 az acr create -n $ACR -g $RG --sku standard 
 
-Login to ACR 
+# Login to ACR 
 az acr login --name $ACR 
 
 # Create Service Principal 
