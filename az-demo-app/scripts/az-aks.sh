@@ -10,12 +10,13 @@ az group create -l $LOCATION -n $RG
 echo "${GREEN} Creating Container Registry: ${RED} ${ACR} ${NOCOLOR}"
 az acr create -n $ACR -g $RG --sku standard 
 
+# Login to ACR 
+az acr login --name $ACR 
 
 # Create Service Principal 
 sp_name=sp-aks-${RG}
 SERVICE_PRINCIPAL=$(az ad sp create-for-rbac --skip-assignment --name ${sp_name})
 echo "${GREEN} Creating Service Principal ${NOCOLOR}"
-echo $SERVICE_PRINCIPAL > service_principal.txt 
 
 SERVICE_PRINCIPAL_ID=$(echo ${SERVICE_PRINCIPAL} | jq .appId -r) 
 CLIENT_SECRET=$(echo ${SERVICE_PRINCIPAL} | jq .password -r) 
