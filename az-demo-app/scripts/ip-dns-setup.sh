@@ -1,20 +1,17 @@
 #!/bin/bash
-
-source ./config.sh
-
 AKS_RG=$(az aks show --resource-group $RG \
     --name $AKS \
     --query nodeResourceGroup \
     -o tsv)
 
 # Create Public IP
-az network public-ip create \
+IP=$( az network public-ip create \
     --resource-group $AKS_RG \
     --name $PUBIP \
     --sku Standard \
     --allocation-method static \
     --query publicIp.ipAddress \
-    -o tsv
+    -o tsv )
 
 
 # Create DNS zone
@@ -39,9 +36,6 @@ az network dns record-set list \
 # Public IP address of your ingress controller
 # Get tne Public IP inside the AKS cluster RG
 # example : MC_az-jaf-demo-rg_az-jaf-demo-aks_southeastasia
-echo "What is your public IP?"
-read IP
-#IP=20.195.60.145
 
 # Name to associate with public IP address
 DNSNAME=$NAME
