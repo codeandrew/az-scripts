@@ -18,7 +18,3 @@ helm install \
   --set installCRDs=true \
   --set nodeSelector."beta\.kubernetes\.io/os"=linux \
   jetstack/cert-manager
-
-NS=app
-kubectl apply -f cluster-issuer.yaml -n $NS
-kubectl apply -f certificates.yaml -n $NS --validate=false
