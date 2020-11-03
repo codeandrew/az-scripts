@@ -5,21 +5,26 @@
 Make sure to follow this in order
 
 ```bash
-# Go to Scripts Folder
-cd scripts
-
 # First edit the variable names
-./config.sh
+./scripts/config.sh
 
 # This will setup the Azure Kubernetes Service
-./aks-setup.sh 
-
-# This will create Public IP and DNS zone
-./ip-dns.sh
+# This will also create a test server with pod and service
+./scripts/aks-setup.sh 
 
 # This will setup ingress load balancer
-./ingress-setup.sh
+./scripts/ingress-setup.sh
 
+# This will setup Cluster Issuer for TLS
+./scripts/install-certmanager.sh
+
+# Create Helm Template for TLS 
+helm template ./chart-tls --values ./chart-tls/values.yaml > tls-template.yaml
+kubectl apply -f tls-template -n app
+
+## Create Helm Template for Application and Ingress 
+helm template ./chart-app --values ./chart-app/values.yaml > app-template.yaml
+kubectl apply -f app-template -n app
 
 ```
 
