@@ -8,5 +8,6 @@ spec:
     ports:
     - name: http
       port: {{ .Values.container.port }}
-      nodePort: 30085
-    type: NodePort
+      protocol: TCP
+      targetPort: {{ .Values.container.port }} 
+    type: ClusterIP

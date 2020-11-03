@@ -17,4 +17,4 @@ container:
 
 ingress:
   name: app-ingress
-  cluster-issuer: letsencrypt
+  clusterIssuer: letsencrypt
