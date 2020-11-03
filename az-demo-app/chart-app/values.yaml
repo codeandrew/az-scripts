@@ -1,0 +1,20 @@
+host: jafdemoaks.southeastasia.cloudapp.azure.com
+email: jeanandrewfuentes@gmail.com
+secretName: tls-secret
+
+services:
+  - name: test-server
+    port: 80
+    path: /
+  - name: demo-application
+    port: 80
+    path: /api/demo
+
+container:
+  image: codeandrew/demo-py:v3
+  imagePullSecrets: regcred
+  port: 80
+
+ingress:
+  name: app-ingress
+  clusterIssuer: letsencrypt

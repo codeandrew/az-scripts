@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Azure Infrastructure Config
+
 export NAME=jafdemoproject
 export LOCATION=southeastasia
 
@@ -14,6 +16,8 @@ export ACR="$NAME"acr
 export VM=$NAME-vm
 export AKS=$NAME-aks
 
+# Kubernetes Config
+NAMESPACE=app
 
 # ----------------------------------
 # Colors

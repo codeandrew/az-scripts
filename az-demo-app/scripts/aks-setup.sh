@@ -47,3 +47,10 @@ az aks get-credentials -g $RG -n $AKS
 # Attaching ACR in our AKS
 echo "Attaching ACR to AKS"
 az aks update -n $AKS -g $RG --attach-acr $ACR
+
+# Create Namespace
+kubectl create namespace $NAMESPACE
+
+# Create example Application
+kubectl run test-server --image=gcr.io/google_containers/echoserver:1.8 -n $NAMESPACE
+kubectl expose pod test-server --type=NodePort --port=80 --target-port=8080 -n $NAMESPACE
