@@ -14,3 +14,7 @@ container:
   image: codeandrew/demo-py:v3
   imagePullSecrets: regcred
   port: 80
+
+ingress:
+  name: app-ingress
+  cluster-issuer: letsencrypt
