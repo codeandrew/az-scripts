@@ -1,0 +1,4 @@
+host: example.org
+email: jeanandrewfuentes@gmail.com
+secretName: tls-secret
+
