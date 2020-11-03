@@ -5,13 +5,13 @@ metadata:
 spec:
   secretName: tls-secret
   dnsNames:
-  - azjafdemoaks.southeastasia.cloudapp.azure.com
+  - jafdemoaks.southeastasia.cloudapp.azure.com
   acme:
     config:
     - http01:
         ingressClass: nginx
       domains:
-      - azjafdemoaks.southeastasia.cloudapp.azure.com
+      - jafdemoaks.southeastasia.cloudapp.azure.com
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt
     kind: ClusterIssuer
