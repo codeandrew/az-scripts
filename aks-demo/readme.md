@@ -20,11 +20,11 @@ Make sure to follow this in order
 
 # Create Helm Template for TLS 
 helm template ./chart-tls --values ./chart-tls/values.yaml > tls-template.yaml
-kubectl apply -f tls-template -n app
+kubectl apply -f tls-template.yaml -n app --validate=false
 
 ## Create Helm Template for Application and Ingress 
 helm template ./chart-app --values ./chart-app/values.yaml > app-template.yaml
-kubectl apply -f app-template -n app
+kubectl apply -f app-template.yaml -n app
 
 ```
 
