@@ -28,6 +28,29 @@ kubectl apply -f app-template.yaml -n app
 
 ```
 
+### Monitoring 
+
+Create RBAC
+```
+kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+````
+
+Get Token first
+```bash
+DASHBOARD_TOKEN=$(kubectl -n kube-system get secrets | grep kubernetes-dashboard-token | awk '{ print $1 }')
+kubectl -n kube-system describe secret $DASHBOARD_TOKEN | awk '$1=="token:"{print $2}'
+```
+
+Open Kubernetes Dashboard
+```
+# Kubernetes Dashboard Proxy
+az aks browse -n $AKS -g $RG
+
+# URL
+# http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#/login
+
+```
+
 ## Notes
 
 ### Ingress Route
