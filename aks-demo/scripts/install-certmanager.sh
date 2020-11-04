@@ -1,3 +1,8 @@
+#!/bin/bash
+
+# Create Namespace
+kubectl create namespace cert-manager
+
 # Label the cert-manager namespace to disable resource validation
 kubectl label namespace cert-manager cert-manager.io/disable-validation=true
 
@@ -6,9 +11,6 @@ helm repo add jetstack https://charts.jetstack.io
 
 # Update your local Helm chart repository cache
 helm repo update
-
-# Create Namespace
-kubectl create namespace cert-manager
 
 # Install the cert-manager Helm chart
 helm install \

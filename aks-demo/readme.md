@@ -20,11 +20,35 @@ Make sure to follow this in order
 
 # Create Helm Template for TLS 
 helm template ./chart-tls --values ./chart-tls/values.yaml > tls-template.yaml
-kubectl apply -f tls-template -n app
+kubectl apply -f tls-template.yaml -n app --validate=false
 
 ## Create Helm Template for Application and Ingress 
 helm template ./chart-app --values ./chart-app/values.yaml > app-template.yaml
-kubectl apply -f app-template -n app
+kubectl apply -f app-template.yaml -n app
+
+```
+
+## Monitoring 
+
+### Kubernetes Dashboard
+Create RBAC
+```
+kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+````
+
+Get Token first
+```bash
+DASHBOARD_TOKEN=$(kubectl -n kube-system get secrets | grep kubernetes-dashboard-token | awk '{ print $1 }')
+kubectl -n kube-system describe secret $DASHBOARD_TOKEN | awk '$1=="token:"{print $2}'
+```
+
+Open Kubernetes Dashboard
+```
+# Kubernetes Dashboard Proxy
+az aks browse -n $AKS -g $RG
+
+# URL
+# http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#/login
 
 ```
 
