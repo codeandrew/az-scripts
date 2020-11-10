@@ -52,6 +52,23 @@ az aks browse -n $AKS -g $RG
 
 ```
 
+### Prometheus
+
+```
+export POD_NAME=$(kubectl get pods --namespace monitoring -l "app=prometheus,component=server" -o jsonpath="{.items[0].metadata.name}")
+
+kubectl --namespace monitoring port-forward $POD_NAME 9090
+```
+
+### Grafana 
+
+export POD_NAME=$(kubectl get pods --namespace monitoring -l "app.kubernetes.io/name=grafana,app.kubernetes.io/instance=grafana" -o jsonpath="{.items[0].metadata.name}")
+kubectl --namespace monitoring port-forward $POD_NAME 3000
+
+
+dashboards:
+- 741
+
 ## Notes
 
 ### Ingress Route
@@ -78,3 +95,8 @@ kubectl describe certificate tls-secret -n app
 ```
 
 ## References
+
+
+### Monitoring 
+
+https://www.infrakloud.com/2019/03/setup-prometheus-grafana-monitoring-on-azure-kubernetes-cluster-aks/
