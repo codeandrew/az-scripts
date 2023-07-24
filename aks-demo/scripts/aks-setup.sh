@@ -1,4 +1,6 @@
 #/bin/bash
+# version 1.0.0
+# using service principal 
 
 source ./config.sh
 
