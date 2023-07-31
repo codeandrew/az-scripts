@@ -26,7 +26,8 @@ kubectl create clusterrolebinding $service_account_name-cluster-admin-binding \
                                   --serviceaccount=default:$service_account_name
 
 # Step 4: Deploy the Kubernetes dashboard using the service account
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.4.0/aio/deploy/recommended.yaml
+#kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.4.0/aio/deploy/recommended.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 
 # Get the token for the service account
 service_account_secret_name=$(kubectl get serviceaccount $service_account_name -o jsonpath='{.secrets[0].name}')
